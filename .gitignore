@@ -1,0 +1,17 @@
+venv/
+*.pyc
+build/
+dist/
+*.egg-info/
+build/
+.idea/
+WebApp
+Qzone_photo_master
+lxfSZ
+Lambda
+iOS-private-api-checker-master
+Django
+bilibili
+小py
+四周爬虫
+树莓派文件
