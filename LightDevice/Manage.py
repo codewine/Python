@@ -11,14 +11,12 @@ from Metod import Method
 
 if __name__ == '__main__':
 
-    #
-    TCPS = threading.Thread(target=TCPServer.StartTCP(), args=())
+    TCPS = threading.Thread(target=TCPServer.StartTCP, args=())
     TCPS.start()
-
 
     Method.MyPrint('print')
     #
-    UDPS = threading.Thread(target=UDPServer.StartUDP(), args=())
+    UDPS = threading.Thread(target=UDPServer.StartUDP, args=())
     UDPS.start()
 
 
@@ -112,8 +110,8 @@ def sendGPIOChange(isOn):
     # UDP
     sendData = DicToData.dataWithHeaderBody(DicToData.GPIOStaues())
     Brocaster.send(sendData)
-    #tcp
-    # TCPServer.sendData(sendData)
+    # tcp
+    TCPServer.sendData(sendData)
     pass
 
 

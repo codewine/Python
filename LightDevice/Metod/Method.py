@@ -4,11 +4,15 @@ import subprocess
 import re
 import socket
 
-
 import datetime
 def MyPrint(*args):
     time_stamp = datetime.datetime.now()
     print (time_stamp.strftime('%H:%M:%S'),args)
+
+
+# from time import ctime
+# def MyPrint(*args):
+#     print (ctime(),args)
 
 def intTO2BYtes(num):
 

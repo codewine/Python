@@ -24,8 +24,11 @@ def sendData(data):
         sockLocal.send(data)
     except:
         Method.MyPrint('TCP 发送失败')
-        heartBeat.cancel()
-        TCPRevice._stop()
+        if heartBeat.isAlive:
+            heartBeat.cancel()
+        if TCPRevice.isAlive:
+            TCPRevice._stop
+
 
 # 心跳发送
 def heartBeatTimer():
@@ -37,17 +40,16 @@ def heartBeatTimer():
         pass
 
 
-
 # 创建新线程
-def reviceData(s):
+def reviceData():
 
     while True:
         try:
             # 接收数据:
-            data, addr = s.recvfrom(1024)
+            data, addr = sockLocal.recvfrom(1024)
             if len(data) > 0:
                 Method.MyPrint('Received from %s:%s.' %(data,addr))
-                Manage.handleTCP(s, data, addr)
+                Manage.handleTCP(sockLocal, data, addr)
         except:
             pass
 
@@ -63,25 +65,36 @@ def StartTCP():
     sockLocal = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     Method.MyPrint('try connect to ', host, port)
     try:
+        sockLocal.settimeout(10)
         sockLocal.connect((host, port))
         Method.MyPrint('connect %s %d sucess' % (host, port))
         # TCP 连接成功
         TCPConnectSuccess()
     except:
+        print('failed')
+        global reTryConnect
+        # 如果存在,停止计时器
+        try:
+            reTryConnect.cancel()
+        except:
+            pass
 
         reTryConnect = threading.Timer(5, StartTCP)
         reTryConnect.start()
-        pass;
+        pass
 
 
 def TCPConnectSuccess():
+
+    #取消自动连接
+    reTryConnect.cancel()
     # 定时发送
     global heartBeat
-    heartBeat = CircleTimer.LoopTimer(3, heartBeatTimer, (sockLocal,))
+    heartBeat = CircleTimer.LoopTimer(3, heartBeatTimer, ())
     heartBeat.start()
     # 处理接收
     global TCPRevice
-    TCPRevice = threading.Thread(target=reviceData,args=(sockLocal,))
+    TCPRevice = threading.Thread(target=reviceData,args=())
     TCPRevice.start()
 
 

@@ -15,12 +15,17 @@ def Methond2():
     while True:
         print('TCP')
         time.sleep(3)
+
 #
 if __name__ == '__main__':
-    UDPS = threading.Thread(target=Methond1(), args=())
+
+
+
+    UDPS = threading.Thread(target=Methond1, args=())
     UDPS.start()
 
     print('test')
 
-    TCPS = threading.Thread(target=Methond2(), args=())
+    TCPS = threading.Thread(target=Methond2, args=())
     TCPS.start()
+
