@@ -28,7 +28,7 @@ def intTO2BYtes(num):
 
 # 服务器地址
 def getServerIPAndPort():
-    return '10.10.100.198',16684
+    return '10.10.100.128',16682
 
 # port
 def port():

@@ -116,3 +116,56 @@ def char_checksum(data, byteorder='little'):
         #print(checksum)
 
     return checksum
+
+
+def TCPLogInData():
+    # return b'40020102ff07070000010010f00000123456123456c000904bf430021ae6e30814662943fb61dd15'
+    return bytearray.fromhex('40020102ff07070000010010f00000123456123456c000904bf430021ae6e30814662943fb61dd15')
+
+def TCPHeartBeatData():
+    # return b'40020102ff07070000010010f10000123456123456c000cb907396086761a5734ad1a11559d684c6'
+    return bytearray.fromhex('40020102ff07070000010010f10000123456123456c000cb907396086761a5734ad1a11559d684c6')
+
+
+
+
+# list() 将对象转换为list
+#
+# str() 将对象转换为str
+#
+# bytearray() 将对象转换为bytearray
+#
+# bytearray.fromhex() 将对象从hexstring转换为bytearray
+#
+# binascii.b2a_hex() 将对象从str转换为hexstring
+
+# 1整形列表转str
+def bytesToStr():
+    x = [0x53, 0x21, 0x6A]
+    y = str(bytearray(x))
+
+# 2str转整形列表
+def StrToBytes():
+    x = '\x53\x21\x6a'
+    y = [ord(c) for c in x]
+
+
+# 3整形列表转换为hexstring
+def bytesToHexStr():
+    import binascii
+    x = [0x53, 0x21, 0x6A]
+    y = str(bytearray(x))
+    z = binascii.b2a_hex(y)
+
+
+#  4hex string转换为整形列表
+def hexStrToBytes():
+    x = '53216A'
+    y = bytearray.fromhex(x)
+    z = list(y)
+
+# 5hexstring转换为str
+def HexStrToStr():
+    x = '53216A'
+    y = bytearray.fromhex(x)
+    z = str(y)

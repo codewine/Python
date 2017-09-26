@@ -6,12 +6,14 @@ import threading
 from Metod import Method
 from TCP import CircleTimer
 import Manage
+from Data import DicToData
 
 class TCPManage():
 
     # 发送TCP
     def sendData(data):
         try:
+            print('TCP发送')
             sockLocal.send(data)
         except:
 
@@ -21,6 +23,7 @@ class TCPManage():
 # 发送TCP
 def sendData(data):
     try:
+        print('tcp发送',data)
         sockLocal.send(data)
     except:
         Method.MyPrint('TCP 发送失败')
@@ -28,14 +31,18 @@ def sendData(data):
             heartBeat.cancel()
         if TCPRevice.isAlive:
             TCPRevice._stop
-
+        try:
+            StartTCP()
+        except:
+            pass
 
 # 心跳发送
 def heartBeatTimer():
     try:
-        data = '心跳'.encode('utf-8')
+        # data = '心跳'.encode('utf-8')
+        # data = DicToData.dataWithHeaderBody(DicToData.devHeartBeat())
+        data = DicToData.TCPHeartBeatData()
         sendData(data)
-        Method.MyPrint('心跳发送')
     except:
         pass
 
@@ -85,6 +92,9 @@ def StartTCP():
 
 
 def TCPConnectSuccess():
+
+    logInData = DicToData.TCPLogInData()
+    sendData(logInData)
 
     #取消自动连接
     reTryConnect.cancel()
