@@ -75,4 +75,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('lawBlog:detail', kwargs={'pk': self.pk})
 
+    # 在Post模型中指定Post的自然排序方式
+    class Meta:
+        ordering = ['-created_time']
+
 

@@ -8,17 +8,19 @@ from TCP import TCPServer
 from Data import DicToData
 import threading
 from Metod import Method
+from  utils import GPIO_switch
 
 if __name__ == '__main__':
 
-    TCPS = threading.Thread(target=TCPServer.StartTCP, args=())
-    TCPS.start()
+    # TCPS = threading.Thread(target=TCPServer.StartTCP, args=())
+    # TCPS.start()
 
-    Method.MyPrint('print')
     #
     UDPS = threading.Thread(target=UDPServer.StartUDP, args=())
     UDPS.start()
 
+    Indicator = threading.Thread(target=GPIO_switch.startIndicatorlight, args=())
+    Indicator.start()
 
 def handleUDP(socket,data,addr):
     try:

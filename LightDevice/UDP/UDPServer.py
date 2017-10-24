@@ -6,6 +6,8 @@ from Metod import Method
 import Manage
 import time, threading
 
+from SmarkConfig import EsptouchConfig
+
 def StartUDP():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     port = Method.port()
@@ -32,6 +34,8 @@ def reviceData(s):
                 pass
             else:
                 Manage.handleUDP(s, data,addr)
+                EsptouchConfig.logmsg(s, data,addr)
+
 
 
 

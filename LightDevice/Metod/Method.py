@@ -32,7 +32,8 @@ def getServerIPAndPort():
 
 # port
 def port():
-    return 6225
+    # return 6225
+    return 7001
 
 def getSelfIP():
     try:
