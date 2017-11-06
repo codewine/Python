@@ -1,0 +1,36 @@
+cat		cat 命令用于连接文件并打印到标准输出设备上。
+chattr		chattr命令用于改变文件属性
+chgrp		chgrp命令用于变更文件或目录的所属群组
+chmod		chmod 可以控制文件如何被他人所调用
+chown		chown 将指定文件的拥有者改为指定的用户或组
+cksum		cksum命令用于检查文件的CRC是否正确
+cmp		cmp命令用于比较两个文件是否有差异
+diff		diff命令用于比较文件的差异
+diffstat	diffstat命令根据diff的比较结果，显示统计数字
+file		file命令用于辨识文件类型
+find		find命令用来在指定目录下查找文件
+git		git命令是文字模式下的文件管理员
+gitview		gitview命令用于观看文件的内容，它会同时显示十六进制和ASCII格式的字码
+indent		indent命令用于调整C原始代码文件的格式
+cut		cut命令用于显示每行从开头算起 num1 到 num2 的文字
+ln		ln命令是一个非常重要命令，它的功能是为某一个文件在另外一个位置建立一个同步的链接
+less		less 与 more 类似，但使用 less 可以随意浏览文件
+locate		locate命令用于查找符合条件的文档
+lsattr		lsattr命令用于显示文件属性
+mattrib		mattrib命令用来变更或显示MS-DOS文件的属性
+mc		mc命令用于提供一个菜单式的文件管理程序
+mdel		mdel命令用来删除 MSDOS 格式的档案
+mdir		mdir命令用于显示MS-DOS目录
+mktemp		mktemp命令用于建立暂存文件
+more		more 命令类似 cat ，不过会以一页一页的形式显示
+mmove		mmove命令用于在MS-DOS文件系统中，移动文件或目录，或更改名称
+mread		mread命令用于将MS-DOS文件复制到Linux/Unix的目录中
+mren		mren命令用于更改MS-DOS文件或目录的名称，或是移动文件或目录
+mtools		mtools命令用于显示mtools支持的指令
+mtoolstest	mtoolstest命令用于测试并显示mtools的相关设置
+mv		mv命令用来为文件或目录改名、或将文件或目录移入其它位置
+od		od指令会读取所给予的文件的内容，并将其内容以八进制字码呈现出来
+
+
+
+
