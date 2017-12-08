@@ -1,0 +1,7 @@
+估算网站的大小一个简便的方法是检查google的爬虫结果
+
+从: http://www.google.com/advanced_search了解到相关内容
+
+
+在google中搜索: site:example.webscraping.com
+过滤: site:example.webscraping.com/view

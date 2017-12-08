@@ -48,7 +48,7 @@ s = '0'
 n = int(s)
 print(10 / n)
 
-然后启动：
+#然后启动：
 
 # $ python3 -m pdb err.py
 # 以参数-m pdb启动后，pdb定位到下一步要执行的代码-> s = '0'。输入命令l来查看代码：

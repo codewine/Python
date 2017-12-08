@@ -1,0 +1,7 @@
+
+关于robots.txt协议参见:
+
+http://www.robotstxt.org
+
+
+本书的示例文件:http://example.webscraping.com/robots.txt
