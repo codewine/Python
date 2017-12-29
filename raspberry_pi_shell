@@ -1,0 +1,165 @@
+lsusb
+如果树莓派已经正常识别，在显示类似于如下的信息中可以看到你的USB无线网卡设备 ID 和芯片型号：
+//
+iwconfig 命令确认一下：
+//
+输入如下命令可以搜索附近所有可连接的 WIFI AP：
+sudo iwlist wlan0 scan
+//
+使用如下命令获得 wifi 设置：
+wpa_passphrase SSID 名称 密码
+回显如下：
+network={
+        ssid="OpenWrt_2.4G"
+        #psk=" 密码 "
+        psk=ff5e84f34e6f496acff05d1a97271508bb4405d5d07864c2dc321941e427f778
+}
+复制这段回显并保存到自己的配置文件中：
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+//
+然后配置/etc/network/interfaces：
+sudo nano /etc/network/interfaces
+配置 自动获得 IP 地址，配置内容如下：
+allow-hotplug wlan0
+auto wlan0
+iface wlan0 inet dhcp  
+pre-up wpa_supplicant -B w -D wext -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf 
+post-down killall -q 
+//
+连接网络：
+sudo /etc/init.d/networking restart
+sudo ifup wlan0
+//
+关闭网络：
+sudo ifdown wlan0
+
+
+
+#
+Operation not possible due to RF-kill
+rfkill 是linux的一个软件，为了省电，它会吧wifi、buletooth关掉
+
+查看托管列表
+rfkill list  
+
+解锁
+rfkill unblock num
+解锁所有
+rfkill unblock all
+
+
+
+
+b'E\x00\x00&v\x8d\x00\x00@\x117\x16\xc0\xa8\x0c|\xff\xff\xff\xff\x18Q\x18Q\x00\x12\xf7\xfe1234567890' ('192.168.12.124', 0)
+
+#
+sudo create_ap wlan0 eth0 raspberry 123456780
+create_ap --list
+create_ap --stop wlan0
+create_ap --stop 4914
+systemctl stop create_ap
+#
+git clone https://corp.xqopen.cn/git/iot-public/iot_device.git
+
+#网卡
+
+sudo iwlist wlan0 scan
+sudo ifup wlan0
+
+#
+iwconfig wlan0 essid <ssid>
+#
+sudo ifup wlan0
+
+
+#!/bin/bash
+# /etc/init.d/iot_device
+
+### BEGIN INIT INFO
+# Provides: embbnux
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: iot_device initscript
+# Description: This service is used to manage a led
+### END INIT INFO
+
+#case "$1" in
+#    start)
+#        echo "Starting LED iot_device"
+#        python3 /home/pi/Python/iot_device/Manage.py &
+#        ;;
+#    stop)
+#        echo "Stopping iot_device"
+#        #killall Manage.py
+#        kill $(ps aux | grep -m 1 'python3 /home/pi/Python/iot_device/Manage.py' | awk '{ print $2 }')
+#        ;;
+#    *)
+#        echo "Usage: service iot_device start|stop"
+#        exit 1
+#        ;;
+#esac
+#exit 0
+#
+
+#!/bin/bash
+# /etc/init.d/iot_device
+
+### BEGIN INIT INFO
+# Provides: embbnux
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: iot_device initscript
+# Description: This service is used to manage a led
+### END INIT INFO
+
+case "$1" in
+    start)
+        echo "Starting LED iot_device"
+        python3 /home/pi/Python/mqtt/iot_device/Manage.py &
+        ;;
+    stop)
+        echo "Stopping iot_device"
+        #killall Manage.py
+        kill $(ps aux | grep -m 1 'python3 /home/pi/Python/mqtt/iot_device/Manage.py' | awk '{ print $2 }')
+        ;;
+    *)
+        echo "Usage: service iot_device start|stop"
+        exit 1
+        ;;
+esac
+exit 0
+
+
+
+
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="xopen_guest"
+    #psk="Xq_1357924680"
+    psk=1454ef9df900b92eb7d748d3bfe3855ffbe6f4345aa0fc144d5095fd0e0f2a9f
+}
+
+
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+        ssid="lemonade"
+        psk="1234567890"
+        key_mgmt=WPA-PSK
+}
+
+# 查看网卡
+sudo journalctl -f
+sudo ip link set wlan0 down && sudo ip link set wlan0 up
+
+# 开机启动
+sudo update-rc.d xx defaults
+# 删除
+sudo update-rc.d -f xx remove
