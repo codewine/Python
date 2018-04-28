@@ -95,4 +95,4 @@ sex_ana(friends)
 #csv信息
 city_ana(friends)
 #签名图
-singauter(friends)
+# singauter(friends)
